@@ -1,5 +1,4 @@
 using ShoppingListManager.ConsoleApp.Core;
-
 namespace ShoppingListManager.ConsoleApp.Categories;
 
 public class CategoryScreen : DefaultScreen<Category>

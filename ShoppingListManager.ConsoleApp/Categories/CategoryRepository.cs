@@ -1,4 +1,3 @@
-using System;
 using ShoppingListManager.ConsoleApp.Core;
 
 namespace ShoppingListManager.ConsoleApp.Categories;
