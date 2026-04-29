@@ -20,40 +20,43 @@ public class CategoryScreen : DefaultScreen<Category>
     string line = screen.GetUIDoubleLine();
 
     Console.Write($"\n{line}");
-    Console.WriteLine("\n{0, -7} | {1, -20} | {2, -10}",
-        "Id", "Nome", "Cor");
+    Console.WriteLine(
+      "\n{0, -7} | {1, -20} | {2, -10}",
+        "Id", "Nome", "Cor"
+    );
 
-    Category?[] categories = [.. repository.FindAll()];
+    List<Category> categories = repository.FindAll();
 
-    for (int i = 0; i < categories.Length; i++)
+    if (categories.Count == 0)
     {
-      Category? category = categories[i];
+      screen.ShowWarningMessage("Não existe nenhum registro.");
+      return;
+    }
 
-      if (category == null)
-        continue;
-
+    foreach (Category c in categories)
+    {
       string? color = string.Empty;
 
-      if (category.Color == Colors.Red)
+      if (c.Color == Colors.Red)
       {
         color = "Vermelho";
         Console.ForegroundColor = ConsoleColor.Red;
       }
 
-      else if (category.Color == Colors.Green)
+      else if (c.Color == Colors.Green)
       {
         color = "Verde";
         Console.ForegroundColor = ConsoleColor.Green;
       }
 
-      else if (category.Color == Colors.Blue)
+      else if (c.Color == Colors.Blue)
       {
         color = "Azul";
         Console.ForegroundColor = ConsoleColor.Blue;
       }
 
       Console.WriteLine("{0, -7} | {1, -20} | {2, -10}",
-          category.Id, category.Name, color);
+          c.Id, c.Name, color);
 
       Console.ResetColor();
     }
