@@ -1,5 +1,5 @@
-﻿using ShoppingListManager.ConsoleApp.Core;
-
+﻿using ShoppingListManager.ConsoleApp.Categories;
+using ShoppingListManager.ConsoleApp.Core;
 namespace ShoppingListManager.ConsoleApp;
 
 class Program
@@ -7,7 +7,9 @@ class Program
   static void Main(string[] args)
   {
 
-    MainScreen mainScreen = new();
+    CategoryRepository categoryRepository = new();
+
+    MainScreen mainScreen = new(categoryRepository);
 
     while (true)
     {

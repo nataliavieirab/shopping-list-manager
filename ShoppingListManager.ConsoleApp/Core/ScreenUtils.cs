@@ -38,6 +38,24 @@ public class ScreenUtils
     ShowEnterMessage();
   }
 
+  public void ShowWarningMessage(string message)
+  {
+
+    ShowMessage($"⚠️  {message}");
+  }
+
+  public void ShowSuccessMessage(string message)
+  {
+
+    ShowMessage($"✅ {message}");
+  }
+
+  public void ShowErrorMessage(string message)
+  {
+
+    ShowMessage($"❌ {message}");
+  }
+
   public void ShowEnterMessage()
   {
     Console.WriteLine("\nDigite ENTER para continuar...");
@@ -46,19 +64,14 @@ public class ScreenUtils
 
   public void ShowError(string[] errors)
   {
-    Console.WriteLine();
-
     for (int i = 0; i < errors.Length; i++)
     {
+
       string error = errors[i];
 
-      ShowUISimpleLine();
-
       Console.ForegroundColor = ConsoleColor.Red;
-      Console.WriteLine(error);
+      ShowErrorMessage(error);
       Console.ResetColor();
-
-      ShowUISimpleLine();
     }
 
     ShowEnterMessage();

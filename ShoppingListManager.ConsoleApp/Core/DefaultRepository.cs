@@ -17,7 +17,7 @@ public abstract class DefaultRepository<T> where T : DefaultEntity<T>
 
     if (entity == null) return false;
 
-    entity.UpdateRegister(newEntity);
+    entity.UpdateData(newEntity);
 
     return true;
   }

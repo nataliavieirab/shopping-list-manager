@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-
 namespace ShoppingListManager.ConsoleApp.Core;
 
 public abstract class DefaultEntity<T> where T : DefaultEntity<T>
@@ -16,5 +15,5 @@ public abstract class DefaultEntity<T> where T : DefaultEntity<T>
   }
 
   public abstract string[] Validate();
-  public abstract void UpdateRegister(T updatedEntity);
+  public abstract void UpdateData(T updatedEntity);
 }

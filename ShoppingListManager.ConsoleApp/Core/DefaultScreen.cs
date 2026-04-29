@@ -64,7 +64,7 @@ public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
 
     repository?.Create(newEntity);
 
-    screen.ShowMessage($"✅ O registro \"{newEntity.Id}\" foi cadastrado com sucesso!");
+    screen.ShowSuccessMessage($"O registro \"{newEntity.Id}\" foi cadastrado com sucesso!");
   }
 
   public void Edit()
@@ -95,11 +95,11 @@ public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
 
     if (!success)
     {
-      screen.ShowMessage("❌ Não foi possível encontrar o registro requisitado.");
+      screen.ShowErrorMessage("Não foi possível encontrar o registro requisitado.");
       return;
     }
 
-    screen.ShowMessage($"✅ O registro \"{selectedId}\" foi editado com sucesso.");
+    screen.ShowSuccessMessage($"O registro \"{selectedId}\" foi editado com sucesso.");
   }
 
   public void Delete()
@@ -115,11 +115,11 @@ public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
 
     if (!success)
     {
-      screen.ShowMessage("❌ Não foi possível encontrar o registro requisitado.");
+      screen.ShowErrorMessage("Não foi possível encontrar o registro requisitado.");
       return;
     }
 
-    screen.ShowMessage($"✅ O registro \"{selectedId}\" foi excluído com sucesso.");
+    screen.ShowSuccessMessage($"O registro \"{selectedId}\" foi excluído com sucesso.");
   }
 
   public abstract void ShowAll(bool showHeader);
