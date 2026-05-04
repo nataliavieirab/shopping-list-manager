@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Products/" />
+    <Folder Include="ShoppingLists/" />
   </ItemGroup>
 
 </Project>

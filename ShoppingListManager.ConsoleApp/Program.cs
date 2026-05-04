@@ -1,6 +1,7 @@
 ﻿using ShoppingListManager.ConsoleApp.Categories;
 using ShoppingListManager.ConsoleApp.Core;
 using ShoppingListManager.ConsoleApp.Products;
+using ShoppingListManager.ConsoleApp.ShoppingLists;
 namespace ShoppingListManager.ConsoleApp;
 
 class Program
@@ -10,8 +11,9 @@ class Program
 
     CategoryRepository categoryRepository = new();
     ProductRepository productRepository = new();
+    ShoppingListRepository shoppingListRepository = new();
 
-    MainScreen mainScreen = new(categoryRepository, productRepository);
+    MainScreen mainScreen = new(categoryRepository, productRepository, shoppingListRepository);
 
     while (true)
     {
@@ -27,11 +29,11 @@ class Program
       while (true)
       {
 
-        string internalMenuOption = selectedScreen.GetMenuOption();
+        string? internalMenuOption = selectedScreen.GetMenuOption();
 
         if (internalMenuOption == "S") break;
 
-        selectedScreen.HandleOption(internalMenuOption);
+        selectedScreen.HandleOption(internalMenuOption!);
       }
     }
   }
