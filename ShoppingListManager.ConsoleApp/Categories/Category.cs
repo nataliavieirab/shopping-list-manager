@@ -19,17 +19,17 @@ public class Category : DefaultEntity<Category>
     Color = updatedEntity.Color;
   }
 
-  public override string[] Validate()
+  public override List<string> Validate()
   {
 
-    string errors = string.Empty;
+    List<string> errors = new List<string>();
 
     if (Name.Length == 0 || Name.Length > 50)
-      errors += "O campo \"Nome\" deve conter entre 0 e 50 caracteres;";
+      errors.Add("O campo \"Nome\" deve conter entre 0 e 50 caracteres;");
 
     if (!Enum.GetValues<Colors>().Contains(Color))
-      errors += "O campo \"Cor\" deve conter uma seleção permitida (Vermelho, Azul, Verde, Branco);";
+      errors.Add("O campo \"Cor\" deve conter uma seleção permitida (Vermelho, Azul, Verde, Branco);");
 
-    return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
+    return errors;
   }
 }
