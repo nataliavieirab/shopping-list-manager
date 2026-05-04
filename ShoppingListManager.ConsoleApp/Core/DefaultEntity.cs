@@ -14,6 +14,6 @@ public abstract class DefaultEntity<T> where T : DefaultEntity<T>
         .Substring(0, 7);
   }
 
-  public abstract string[] Validate();
+  public abstract List<string> Validate();
   public abstract void UpdateData(T updatedEntity);
 }

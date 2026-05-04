@@ -28,23 +28,23 @@ public class Product : DefaultEntity<Product>
     Category = updatedEntity.Category;
   }
 
-  public override string[] Validate()
+  public override List<string> Validate()
   {
 
-    string errors = string.Empty;
+    List<string> errors = new List<string>();
 
     if (string.IsNullOrWhiteSpace(Name))
-      errors += "O campo \"Nome\" deve ser preenchido;";
+      errors.Add("O campo \"Nome\" deve ser preenchido;");
 
     else if (Name.Length < 2 || Name.Length > 100)
-      errors += "O campo \"Nome\" deve conter entre 2 e 100 caracteres;";
+      errors.Add("O campo \"Nome\" deve conter entre 2 e 100 caracteres;");
 
     if (!Enum.GetValues<UnitOfMeasure>().Contains(UnitOfMeasure))
-      errors += "O campo \"Unidade de Medida\" deve conter uma seleção permitida (Kg, Unidade, Litro, Caixa);";
+      errors.Add("O campo \"Unidade de Medida\" deve conter uma seleção permitida (Kg, Unidade, Litro, Caixa);");
 
-    // if (EstimatedPrice <= 0)
-    //   errors += "O campo \"Unidade de Medida\" deve ser preenchido com um valor positivo;";
+    if (EstimatedPrice == 0)
+      errors.Add("O campo \"Preço Aproximado\" deve ser preenchido.");
 
-    return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
+    return errors;
   }
 }

@@ -69,12 +69,10 @@ public class ScreenUtils
     Console.ReadLine();
   }
 
-  public void ShowError(string[] errors)
+  public void ShowError(List<string> errors)
   {
-    for (int i = 0; i < errors.Length; i++)
+    foreach (string error in errors)
     {
-
-      string error = errors[i];
 
       Console.ForegroundColor = ConsoleColor.Red;
       ShowErrorMessage(error);

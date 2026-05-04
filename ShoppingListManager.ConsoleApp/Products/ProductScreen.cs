@@ -1,6 +1,5 @@
 using ShoppingListManager.ConsoleApp.Categories;
 using ShoppingListManager.ConsoleApp.Core;
-
 namespace ShoppingListManager.ConsoleApp.Products;
 
 public class ProductScreen : DefaultScreen<Product>, IScreenOptions, IScreenCrud
@@ -57,7 +56,7 @@ public class ProductScreen : DefaultScreen<Product>, IScreenOptions, IScreenCrud
       Console.ResetColor();
 
       Console.Write("{0, -10} | ", p.UnitOfMeasure);
-      Console.Write("{0, -10} | ", p.EstimatedPrice);
+      Console.Write("{0, -10} | ", p.EstimatedPrice.ToString("C2"));
     }
 
     if (showHeader) screen.ShowEnterMessage();
