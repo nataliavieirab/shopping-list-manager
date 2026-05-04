@@ -1,6 +1,6 @@
 namespace ShoppingListManager.ConsoleApp.Core;
 
-public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
+public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 {
   private readonly ScreenUtils screen;
   public string entityName = string.Empty;
@@ -33,7 +33,7 @@ public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
   public void HandleOption(string option)
   {
     if (option == "1")
-      Register();
+      Create();
 
     else if (option == "2")
       Edit();
@@ -45,7 +45,7 @@ public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
       ShowAll(true);
   }
 
-  public void Register()
+  public void Create()
   {
 
     screen.OperationHeader($"Cadastro de {entityName}");
@@ -58,7 +58,7 @@ public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
     {
       screen.ShowError(errors);
 
-      Register();
+      Create();
       return;
     }
 

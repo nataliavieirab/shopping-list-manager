@@ -1,7 +1,7 @@
 using ShoppingListManager.ConsoleApp.Core;
 namespace ShoppingListManager.ConsoleApp.Categories;
 
-public class CategoryScreen : DefaultScreen<Category>
+public class CategoryScreen : DefaultScreen<Category>, IScreenOptions, IScreenCrud
 {
   private readonly ScreenUtils screen = new("Gestão de Categorias");
   private readonly CategoryRepository repository;
