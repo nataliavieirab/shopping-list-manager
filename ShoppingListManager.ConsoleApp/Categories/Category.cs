@@ -27,7 +27,7 @@ public class Category : DefaultEntity<Category>
     if (Name.Length == 0 || Name.Length > 50)
       errors += "O campo \"Nome\" deve conter entre 0 e 50 caracteres;";
 
-    else if (!Enum.GetValues<Colors>().Contains(Color))
+    if (!Enum.GetValues<Colors>().Contains(Color))
       errors += "O campo \"Cor\" deve conter uma seleção permitida (Vermelho, Azul, Verde, Branco);";
 
     return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);

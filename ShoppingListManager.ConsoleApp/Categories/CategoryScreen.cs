@@ -4,7 +4,6 @@ namespace ShoppingListManager.ConsoleApp.Categories;
 public class CategoryScreen : DefaultScreen<Category>, IScreenOptions, IScreenCrud
 {
   private readonly ScreenUtils screen = new("Gestão de Categorias");
-  private readonly CategoryRepository repository;
 
   public CategoryScreen(CategoryRepository repository) : base("Categoria", repository)
   {

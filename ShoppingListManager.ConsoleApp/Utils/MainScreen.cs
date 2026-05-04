@@ -1,22 +1,28 @@
 using ShoppingListManager.ConsoleApp.Categories;
 using ShoppingListManager.ConsoleApp.Core;
+using ShoppingListManager.ConsoleApp.Products;
 namespace ShoppingListManager.ConsoleApp;
 
 class MainScreen
 {
   private readonly ScreenUtils screen = new("Lista de Compras");
   private CategoryRepository categoryRepository;
+  private ProductRepository productRepository;
 
-  public MainScreen(CategoryRepository categoryRepository)
+  public MainScreen(CategoryRepository categoryRepository, ProductRepository productRepository)
   {
 
     this.categoryRepository = categoryRepository;
+    this.productRepository = productRepository;
 
-    Category category = new("Frutas", Colors.Blue);
+    Category category = new("Mercearia", Colors.Blue);
     categoryRepository.Create(category);
+
+    Product product = new("Café", UnitOfMeasure.Kilogram, 24, category);
+    productRepository.Create(product);
   }
 
-  public IScreen? GetMainMenuOption()
+  public IScreenOptions? GetMainMenuOption()
   {
 
     screen.MainHeader();
@@ -32,6 +38,9 @@ class MainScreen
 
     if (menuOption == "1")
       return new CategoryScreen(categoryRepository);
+
+    else if (menuOption == "2")
+      return new ProductScreen(productRepository, categoryRepository);
 
     return null;
   }

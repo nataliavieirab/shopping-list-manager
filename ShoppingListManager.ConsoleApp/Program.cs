@@ -1,5 +1,6 @@
 ﻿using ShoppingListManager.ConsoleApp.Categories;
 using ShoppingListManager.ConsoleApp.Core;
+using ShoppingListManager.ConsoleApp.Products;
 namespace ShoppingListManager.ConsoleApp;
 
 class Program
@@ -8,13 +9,14 @@ class Program
   {
 
     CategoryRepository categoryRepository = new();
+    ProductRepository productRepository = new();
 
-    MainScreen mainScreen = new(categoryRepository);
+    MainScreen mainScreen = new(categoryRepository, productRepository);
 
     while (true)
     {
 
-      IScreen? selectedScreen = mainScreen.GetMainMenuOption();
+      IScreenOptions? selectedScreen = mainScreen.GetMainMenuOption();
 
       if (selectedScreen == null)
       {

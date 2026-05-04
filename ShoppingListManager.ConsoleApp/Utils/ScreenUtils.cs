@@ -27,6 +27,13 @@ public class ScreenUtils
     Console.WriteLine($"\n{centeredText.ToUpper()}");
   }
 
+  public void InternOperationHeader(string operation)
+  {
+
+    string centeredText = new string(' ', 42) + operation;
+    Console.WriteLine($"\n{centeredText}");
+  }
+
   public void ShowMessage(string message)
   {
     Console.WriteLine();

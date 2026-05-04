@@ -4,7 +4,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 {
   private readonly ScreenUtils screen;
   public string entityName = string.Empty;
-  private DefaultRepository<T> repository;
+  protected DefaultRepository<T> repository;
 
   public DefaultScreen(string entityName, DefaultRepository<T> repository)
   {
