@@ -13,7 +13,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
     this.repository = repository;
   }
 
-  public string GetMenuOption()
+  public virtual string? GetMenuOption()
   {
 
     screen.MainHeader();
@@ -52,9 +52,9 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
     T newEntity = GetRegistrationData();
 
-    string[] errors = newEntity.Validate();
+    List<string> errors = newEntity.Validate();
 
-    if (errors.Length > 0)
+    if (errors.Count > 0)
     {
       screen.ShowError(errors);
 
@@ -81,9 +81,9 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
     T newEntity = GetRegistrationData();
 
-    string[] errors = newEntity.Validate();
+    List<string> errors = newEntity.Validate();
 
-    if (errors.Length > 0)
+    if (errors.Count > 0)
     {
       screen.ShowError(errors);
 
