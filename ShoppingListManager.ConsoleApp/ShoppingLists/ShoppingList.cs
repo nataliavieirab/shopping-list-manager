@@ -1,4 +1,5 @@
 using ShoppingListManager.ConsoleApp.Core;
+using ShoppingListManager.ConsoleApp.Products;
 
 namespace ShoppingListManager.ConsoleApp.ShoppingLists;
 
@@ -8,6 +9,7 @@ public class ShoppingList : DefaultEntity<ShoppingList>
   public string Name { get; private set; }
   public DateTime CreatedAt { get; private set; }
   public ShoppingListStatus Status { get; private set; }
+  public List<ListItem> Items { get; private set; } = [];
 
   public ShoppingList(string name)
   {
@@ -26,6 +28,27 @@ public class ShoppingList : DefaultEntity<ShoppingList>
   public void Conclude()
   {
     Status = ShoppingListStatus.Completed;
+  }
+
+  public void AddItem(Product product, int quantity)
+  {
+    ListItem item = new(product, quantity);
+
+    Items.Add(item);
+  }
+
+  public bool RemoveItem(string itemId)
+  {
+    foreach (ListItem item in Items)
+    {
+      if (item.Id == itemId)
+      {
+        Items.Remove(item);
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public override void UpdateData(ShoppingList updatedEntity)
