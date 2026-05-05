@@ -10,6 +10,18 @@ public class ShoppingList : DefaultEntity<ShoppingList>
   public DateTime CreatedAt { get; private set; }
   public ShoppingListStatus Status { get; private set; }
   public List<ListItem> Items { get; private set; } = [];
+  public decimal TotalSpent
+  {
+    get
+    {
+      decimal totalSpent = 0;
+
+      foreach (ListItem item in Items)
+        totalSpent += item.Price;
+
+      return totalSpent;
+    }
+  }
 
   public ShoppingList(string name)
   {
