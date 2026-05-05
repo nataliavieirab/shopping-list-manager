@@ -21,22 +21,26 @@ class MainScreen
     Category category = new("Mercearia", Colors.Blue);
     categoryRepository.Create(category);
 
-    Product product = new("Café", UnitOfMeasure.Kilogram, 24, category);
+    Product product = new("Café Melita", UnitOfMeasure.Kilogram, 24, category);
     productRepository.Create(product);
 
+    Product product2 = new("Bolacha Negresco", UnitOfMeasure.Kilogram, 3, category);
+    productRepository.Create(product2);
+
     ShoppingList shoppingList = new("Mercado");
+    shoppingList.AddItem(product, 2);
+    shoppingList.AddItem(product2, 4);
     shoppingListRepository.Create(shoppingList);
   }
 
   public IScreenOptions? GetMainMenuOption()
   {
 
-    screen.MainHeader();
+    screen.ShowTitle();
 
     Console.WriteLine("\n[1] Gerenciar Categorias");
     Console.WriteLine("[2] Gerenciar Produtos");
     Console.WriteLine("[3] Gerenciar Listas");
-    Console.WriteLine("[4] Gerenciar Itens de Listas de Compras");
     Console.WriteLine("[S] Sair");
 
     Console.Write("\n> ");
@@ -49,7 +53,7 @@ class MainScreen
       return new ProductScreen(productRepository, categoryRepository);
 
     else if (menuOption == "3")
-      return new ShoppingListScreen(shoppingListRepository);
+      return new ShoppingListScreen(shoppingListRepository, productRepository);
 
     return null;
   }

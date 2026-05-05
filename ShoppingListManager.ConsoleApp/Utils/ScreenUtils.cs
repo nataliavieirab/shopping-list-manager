@@ -2,29 +2,43 @@ namespace ShoppingListManager.ConsoleApp.Core;
 
 public class ScreenUtils
 {
-  public string? title;
+  public string title;
 
   public ScreenUtils(string _title)
   {
     title = _title;
   }
 
-  public void MainHeader()
+  public void OperationHeader(string operation)
   {
+    ShowTitle();
+
+    string centeredText = CenterText(operation);
+
+    Console.WriteLine($"\n{centeredText.ToUpper()}");
+  }
+
+  public void ShowTitle()
+  {
+
     string line = GetUIDoubleLine();
+    string centeredText = CenterText(title);
 
     Console.Clear();
     Console.WriteLine(line);
-    Console.WriteLine($"------------------------------------------ {title} ----------------------------------------------");
+    Console.WriteLine(centeredText);
     Console.WriteLine(line);
   }
 
-  public void OperationHeader(string operation)
+  public static string CenterText(string text)
   {
-    MainHeader();
+    int consoleWidth = Console.WindowWidth;
+    int padding = (consoleWidth - text.Length) / 2;
 
-    string centeredText = new string(' ', 42) + operation;
-    Console.WriteLine($"\n{centeredText.ToUpper()}");
+    if (padding > 0)
+      return new string(' ', padding) + text;
+    else
+      return text;
   }
 
   public void InternOperationHeader(string operation)
@@ -100,11 +114,17 @@ public class ScreenUtils
 
   public string GetUIDoubleLine()
   {
+    return new string('=', Console.WindowWidth - 1);
+  }
+
+  public string GetTableLine()
+  {
     return "==========================================================================================================";
   }
 
   public void ShowUISimpleLine()
   {
-    Console.WriteLine("----------------------------------------------------------------------------------------------------------");
+    string line = new string('-', Console.WindowWidth - 1);
+    Console.WriteLine(line);
   }
 }

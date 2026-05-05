@@ -15,7 +15,7 @@ public class CategoryScreen : DefaultScreen<Category>, IScreenOptions, IScreenCr
   {
     if (showHeader) screen.OperationHeader("Visualização de Categorias");
 
-    string line = screen.GetUIDoubleLine();
+    string line = screen.GetTableLine();
 
     Console.Write($"\n{line}");
     Console.WriteLine(

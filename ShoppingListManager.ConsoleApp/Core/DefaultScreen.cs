@@ -16,7 +16,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
   public virtual string? GetMenuOption()
   {
 
-    screen.MainHeader();
+    screen.ShowTitle();
     Console.WriteLine($"\n[1] Cadastrar {entityName}");
     Console.WriteLine($"[2] Editar {entityName}");
     Console.WriteLine($"[3] Excluir {entityName}");
@@ -30,7 +30,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
         : input.ToUpper();
   }
 
-  public void HandleOption(string option)
+  public virtual void HandleOption(string option)
   {
     if (option == "1")
       Create();

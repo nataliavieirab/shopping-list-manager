@@ -18,20 +18,20 @@ public class ProductScreen : DefaultScreen<Product>, IScreenOptions, IScreenCrud
   {
     if (showHeader) screen.OperationHeader("Visualização de Produtos");
 
-    string line = screen.GetUIDoubleLine();
+    string line = screen.GetTableLine();
 
     List<Product> products = repository.FindAll();
 
     if (products.Count == 0)
     {
-      Console.ForegroundColor = ConsoleColor.Yellow;
+      // Console.ForegroundColor = ConsoleColor.Yellow;
       screen.ShowWarningMessage("Não existe nenhum registro de produto.");
       return;
     }
 
     Console.Write($"\n{line}");
     Console.WriteLine(
-        "{0, -7} | {1, -20} | {2, -10} | {3, -10} | {4, -10}",
+        "\n{0, -7} | {1, -20} | {2, -10} | {3, -10} | {4, -10}",
         "ID", "Nome", "Categoria", "Unidade", "Preço Apx."
     );
 
@@ -90,7 +90,7 @@ public class ProductScreen : DefaultScreen<Product>, IScreenOptions, IScreenCrud
 
     List<Category> categories = categoryRepository.FindAll();
 
-    string line = screen.GetUIDoubleLine();
+    string line = screen.GetTableLine();
 
     Console.Write($"\n{line}");
     Console.WriteLine(
