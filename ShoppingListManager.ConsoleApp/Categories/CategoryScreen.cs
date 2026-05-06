@@ -1,14 +1,16 @@
 using ShoppingListManager.ConsoleApp.Core;
+using ShoppingListManager.ConsoleApp.Products;
 namespace ShoppingListManager.ConsoleApp.Categories;
 
 public class CategoryScreen : DefaultScreen<Category>, IScreenOptions, IScreenCrud
 {
   private readonly ScreenUtils screen = new("Gestão de Categorias");
+  private readonly ProductRepository productRepository;
 
-  public CategoryScreen(CategoryRepository repository) : base("Categoria", repository)
+  public CategoryScreen(CategoryRepository repository, ProductRepository productRepository) : base("Categoria", repository)
   {
 
-    this.repository = repository;
+    this.productRepository = productRepository;
   }
 
   public override void ShowAll(bool showHeader)
@@ -135,5 +137,42 @@ public class CategoryScreen : DefaultScreen<Category>, IScreenOptions, IScreenCr
     else color = Colors.White;
 
     return color;
+  }
+
+  protected override List<string> ValidateDuplicateRecord(Category newEntity, string? ignoredId = null)
+  {
+
+    List<string> errors = new List<string>();
+
+    List<Category> categories = repository.FindAll();
+
+    foreach (Category c in categories)
+    {
+      if (c.Id != ignoredId && c.Name == newEntity.Name)
+      {
+        errors.Add($"Já existe uma categoria com o nome \"{newEntity.Name}\"");
+        break;
+      }
+    }
+
+    return errors;
+  }
+
+  protected override List<string> ValidateRecordDeletion(Category record)
+  {
+    List<string> errors = new List<string>();
+
+    List<Product> products = productRepository.FindAll();
+
+    foreach (Product p in products)
+    {
+      if (p.Category == record)
+      {
+        errors.Add("Não é possível excluir uma categoria com produtos cadastrados.");
+        break;
+      }
+    }
+
+    return errors;
   }
 }

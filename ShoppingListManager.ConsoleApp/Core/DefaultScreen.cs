@@ -62,7 +62,17 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
       return;
     }
 
-    repository?.Create(newEntity);
+    List<string> duplicationErros = ValidateDuplicateRecord(newEntity);
+
+    if (duplicationErros.Count > 0)
+    {
+      screen.ShowError(duplicationErros);
+
+      Create();
+      return;
+    }
+
+    repository.Create(newEntity);
 
     screen.ShowSuccessMessage($"O registro \"{newEntity.Id}\" foi cadastrado com sucesso!");
   }
@@ -109,13 +119,33 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
     ShowAll(showHeader: false);
 
-    string? selectedId = screen.GetEntityID(entityName);
+    string? selectedId = GetEntityID();
+
+    if (selectedId == null) return;
+
+    T? selectedRegister = repository.FindById(selectedId);
+
+    if (selectedRegister == null)
+    {
+      screen.ShowErrorMessage("Não foi possível encontrar o registro requisitado.");
+
+      Delete();
+      return;
+    }
+
+    List<string> duplicationErros = ValidateRecordDeletion(selectedRegister);
+
+    if (duplicationErros.Count > 0)
+    {
+      screen.ShowError(duplicationErros);
+      return;
+    }
 
     bool success = repository.Delete(selectedId);
 
     if (!success)
     {
-      screen.ShowErrorMessage("Não foi possível encontrar o registro requisitado.");
+      screen.ShowErrorMessage("Não foi possível excluir o registro requisitado.");
       return;
     }
 
@@ -124,5 +154,33 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
   public abstract void ShowAll(bool showHeader);
 
+  protected virtual List<string> ValidateDuplicateRecord(T newEntity, string? ignoredId = null)
+  {
+    return new List<string>();
+  }
+
+  protected virtual List<string> ValidateRecordDeletion(T record)
+  {
+    return new List<string>();
+  }
+
   protected abstract T GetRegistrationData();
+
+  private string? GetEntityID()
+  {
+    string? selectedId;
+
+    do
+    {
+      Console.WriteLine("\nDigite o ID do registro que deseja excluir (ou S para sair): ");
+      Console.Write("> ");
+      selectedId = Console.ReadLine() ?? string.Empty;
+
+      if (selectedId.ToUpper() == "S") return null;
+
+      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7) break;
+    } while (true);
+
+    return selectedId;
+  }
 }
