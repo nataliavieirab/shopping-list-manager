@@ -246,6 +246,7 @@ public class ShoppingListScreen : DefaultScreen<ShoppingList>, IScreenOptions, I
 
     return errors;
   }
+
   private void ShowProducts()
   {
 
