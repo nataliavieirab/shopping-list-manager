@@ -1,17 +1,20 @@
 using ShoppingListManager.ConsoleApp.Categories;
 using ShoppingListManager.ConsoleApp.Core;
+using ShoppingListManager.ConsoleApp.ShoppingLists;
 namespace ShoppingListManager.ConsoleApp.Products;
 
 public class ProductScreen : DefaultScreen<Product>, IScreenOptions, IScreenCrud
 {
-
   private readonly ScreenUtils screen = new("Gestão de Produtos");
   private readonly CategoryRepository categoryRepository;
 
-  public ProductScreen(ProductRepository repository, CategoryRepository categoryRepository) : base("Produto", repository)
+  private readonly ShoppingListRepository shoppingListRepository;
+
+  public ProductScreen(ProductRepository repository, CategoryRepository categoryRepository, ShoppingListRepository shoppingListRepository) : base("Produto", repository)
   {
     this.repository = repository;
     this.categoryRepository = categoryRepository;
+    this.shoppingListRepository = shoppingListRepository;
   }
 
   public override void ShowAll(bool showHeader)
@@ -82,6 +85,51 @@ public class ProductScreen : DefaultScreen<Product>, IScreenOptions, IScreenCrud
     UnitOfMeasure unitOfMeasure = GetMeasurementUnit();
 
     return new Product(name, unitOfMeasure, estimatedPrice, selectedCategory);
+  }
+
+  protected override List<string> ValidateDuplicateRecord(
+          Product newEntity,
+          string? ignoredId = null
+      )
+  {
+    List<string> errors = new List<string>();
+
+    List<Product> products = repository.FindAll();
+
+    foreach (Product p in products)
+    {
+      if (p.Id != ignoredId && p.Name == newEntity.Name)
+      {
+        if (p.Category == newEntity.Category)
+        {
+          errors.Add($"Já existe um produto com o mesmo nome na categoria \"{newEntity.Category.Name}\"");
+          break;
+        }
+      }
+    }
+
+    return errors;
+  }
+
+  protected override List<string> ValidateRecordDeletion(Product record)
+  {
+    List<string> errors = new List<string>();
+
+    List<ShoppingList> lists = shoppingListRepository.FindAll();
+
+    foreach (ShoppingList l in lists)
+    {
+      foreach (ListItem i in l.Items)
+      {
+        if (i.Product == record)
+        {
+          errors.Add("Não é possível excluir um produto cadastrado como item em uma lista.");
+          break;
+        }
+      }
+    }
+
+    return errors;
   }
 
   private string SelectCategory()

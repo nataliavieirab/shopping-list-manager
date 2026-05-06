@@ -50,7 +50,7 @@ class MainScreen
       return new CategoryScreen(categoryRepository, productRepository);
 
     else if (menuOption == "2")
-      return new ProductScreen(productRepository, categoryRepository);
+      return new ProductScreen(productRepository, categoryRepository, shoppingListRepository);
 
     else if (menuOption == "3")
       return new ShoppingListScreen(shoppingListRepository, productRepository);
