@@ -47,7 +47,7 @@ class MainScreen
     string menuOption = Console.ReadLine()?.ToUpper()!;
 
     if (menuOption == "1")
-      return new CategoryScreen(categoryRepository);
+      return new CategoryScreen(categoryRepository, productRepository);
 
     else if (menuOption == "2")
       return new ProductScreen(productRepository, categoryRepository);
