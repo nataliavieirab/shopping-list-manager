@@ -236,6 +236,16 @@ public class ShoppingListScreen : DefaultScreen<ShoppingList>, IScreenOptions, I
     return new ShoppingList(nome);
   }
 
+  protected override List<string> ValidateRecordDeletion(ShoppingList record)
+  {
+
+    List<string> errors = new List<string>();
+
+    if (record.Items.Count > 0)
+      errors.Add("Não é possível excluir uma lista de compras com itens cadastrados.");
+
+    return errors;
+  }
   private void ShowProducts()
   {
 
