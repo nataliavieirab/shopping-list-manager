@@ -1,92 +1,92 @@
-# Lista de Compras
+# Shopping List
 
-Maria faz as compras da família toda semana, mas sempre esquece algum item ou compra coisas que já tem em casa.  
-Para resolver esse problema, foi criado o sistema **Lista de Compras**, uma aplicação simples para cadastrar produtos, organizar listas e registrar as compras realizadas.    
-
----
-
-## 1. Módulo de Categorias
-
-**Requisitos Funcionais:**
-- O sistema deve permitir cadastrar novas categorias
-- O sistema deve permitir editar categorias existentes
-- O sistema deve permitir excluir categorias
-- O sistema deve permitir visualizar todas as categorias
-
-**Regras de Negócio:**
-- Campos obrigatórios:
-  - Nome (texto único, máximo 50 caracteres)
-  - Cor (seleção de paleta ou hexadecimal)
-- Não pode haver categorias com nomes duplicados
-- Não permitir excluir uma categoria caso tenha produtos vinculados
+Maria does the family's grocery shopping every week, but she often forgets items or buys things she already has at home.  
+To solve this problem, the **Shopping List** system was created, a simple application to register products, organize lists, and track purchases.
 
 ---
 
-## 2. Módulo de Produtos
+## 1. Categories Module
 
-**Requisitos Funcionais:**
-- O sistema deve permitir cadastrar novos produtos
-- O sistema deve permitir editar produtos existentes
-- O sistema deve permitir excluir produtos
-- O sistema deve permitir visualizar todos os produtos cadastrados
+### Functional Requirements
+- The system must allow registering new categories
+- The system must allow editing existing categories
+- The system must allow deleting categories
+- The system must allow viewing all categories
 
-**Regras de Negócio:**
-- Campos obrigatórios:
-  - Nome (2 a 100 caracteres)
-
----
-
-## 3. Módulo de Listas de Compras
-
-**Requisitos Funcionais:**
-- O sistema deve permitir criar novas listas de compras
-- O sistema deve permitir editar listas existentes
-- O sistema deve permitir excluir listas
-- O sistema deve permitir visualizar todas as listas
-
-**Regras de Negócio:**
-- Campos obrigatórios:
-  - Nome da lista (mínimo 3 caracteres, máximo 100)
-  - Data de criação (automática)
-- Status possíveis: Aberta / Concluída
-- Não permitir excluir uma lista que já tenha itens vinculados
-- O sistema deve exibir o total de itens e o total estimado gasto de cada lista
+### Business Rules
+- Required fields:
+  - Name (unique text, maximum 50 characters)
+  - Color (palette selection or hexadecimal value)
+- Categories cannot have duplicate names
+- A category cannot be deleted if it has linked products
 
 ---
 
-## 4. Módulo de Itens da Lista
+## 2. Products Module
 
-**Requisitos Funcionais:**
-- O sistema deve permitir adicionar itens a uma lista de compras
-- O sistema deve permitir remover itens de uma lista
-- O sistema deve permitir visualizar todos os itens de uma lista
-- O sistema deve exibir a categoria do produto ao selecionar um item para a lista
+### Functional Requirements
+- The system must allow registering new products
+- The system must allow editing existing products
+- The system must allow deleting products
+- The system must allow viewing all registered products
 
-**Regras de Negócio:**
-- Campos obrigatórios:
-  - Produto (seleção obrigatória)
-  - Quantidade (número positivo)
-- Não pode adicionar o mesmo produto duas vezes na mesma lista
-- O valor total da lista deve ser calculado automaticamente (soma dos preços estimados × quantidades)
+### Business Rules
+- Required fields:
+  - Name (2 to 100 characters)
 
 ---
 
-## Como utilizar
+## 3. Shopping Lists Module
 
-1. Clone o repositório ou baixe o código fonte.
-2. Abra o terminal ou prompt de comando e navegue até a pasta raiz.
-3. Utilize o comando abaixo para restaurar as dependências do projeto:
+### Functional Requirements
+- The system must allow creating new shopping lists
+- The system must allow editing existing lists
+- The system must allow deleting lists
+- The system must allow viewing all lists
 
-   ```bash
-   dotnet restore
-   ```
+### Business Rules
+- Required fields:
+  - List name (minimum 3 characters, maximum 100)
+  - Creation date (automatic)
+- Possible statuses: Open / Completed
+- A list cannot be deleted if it has linked items
+- The system must display the total number of items and the estimated total cost of each list
 
-4. Para executar o projeto compilando em tempo real
+---
 
-   ```bash
-   dotnet run --project ShoppingListManager.ConsoleApp
-   ```
+## 4. List Items Module
 
-## Requisitos
+### Functional Requirements
+- The system must allow adding items to a shopping list
+- The system must allow removing items from a list
+- The system must allow viewing all items in a list
+- The system must display the product category when selecting an item for the list
+
+### Business Rules
+- Required fields:
+  - Product (mandatory selection)
+  - Quantity (positive number)
+- The same product cannot be added twice in the same list
+- The total value of the list must be automatically calculated (sum of estimated price × quantity)
+
+---
+
+## How to Use
+
+1. Clone the repository or download the source code.
+2. Open the terminal or command prompt and navigate to the root folder.
+3. Run the command below to restore dependencies:
+
+```bash
+dotnet restore
+```
+
+4. Run the project with live compilation:
+
+```bash
+dotnet run --project ShoppingListManager.ConsoleApp
+```
+
+## Requirements
 
 - .NET 10.0 SDK
